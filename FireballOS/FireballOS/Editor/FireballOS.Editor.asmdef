@@ -1,0 +1,19 @@
+{
+    "name": "FireballOS.Editor",
+    "rootNamespace": "FireballOS.Editor",
+    "references": [
+        "FireballOS",
+        "DeadFrame.Contracts"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
