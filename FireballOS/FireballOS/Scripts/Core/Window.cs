@@ -13,11 +13,26 @@ namespace FireballOS
         [Header("Resize & Maximize Settings")]
         [SerializeField] private RectTransform rectTransform;
 
+        [Tooltip("Open() büyütülmüş açar. Görev çubuğundan geri getirmek kullanıcının boyutunu korur.")]
+        [SerializeField] private bool openMaximized;
+
         [Header("Maximize Button UI")]
         [SerializeField] private TextMeshProUGUI maximizeButtonText;
+        [SerializeField] private string maximizeIcon = "\uD83D\uDDD6"; // 🗖 (Segoe UI Symbol Maximize)
+        [SerializeField] private string restoreIcon = "\uD83D\uDDD7";  // 🗗 (Segoe UI Symbol Restore)
+        [SerializeField] private TMP_FontAsset symbolFont;
 
-        private const string MAXIMIZE_ICON = "□";
-        private const string RESTORE_ICON = "■";
+        public string MaximizeIcon
+        {
+            get => string.IsNullOrEmpty(maximizeIcon) ? "\uD83D\uDDD6" : maximizeIcon;
+            set { maximizeIcon = value; UpdateMaximizeButtonIcon(); }
+        }
+
+        public string RestoreIcon
+        {
+            get => string.IsNullOrEmpty(restoreIcon) ? "\uD83D\uDDD7" : restoreIcon;
+            set { restoreIcon = value; UpdateMaximizeButtonIcon(); }
+        }
 
         private bool isMaximized = false;
         public bool IsMaximized => isMaximized; // Dışarıdan kontrol için
@@ -96,6 +111,7 @@ namespace FireballOS
         {
             gameObject.SetActive(true);
             BringToFront();
+            if (openMaximized && !isMaximized) ToggleMaximize();
 
             // Görev çubuğuna butonu kaydet / ekle
             var tb = GetTaskbar();
@@ -145,11 +161,48 @@ namespace FireballOS
             BringToFront();
         }
 
+        private bool IsValidFontAsset(TMP_FontAsset fontAsset)
+        {
+            if (fontAsset == null) return false;
+            try
+            {
+                if (fontAsset.atlasTextures == null || fontAsset.atlasTextures.Length == 0) return false;
+                if (fontAsset.atlasTextures[0] == null) return false;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private void UpdateMaximizeButtonIcon()
         {
             if (maximizeButtonText != null)
             {
-                maximizeButtonText.text = isMaximized ? RESTORE_ICON : MAXIMIZE_ICON;
+                if (symbolFont == null)
+                {
+                    var loaded = Resources.Load<TMP_FontAsset>("Fonts & Materials/SegoeUISymbol SDF");
+                    if (IsValidFontAsset(loaded))
+                    {
+                        symbolFont = loaded;
+                    }
+                }
+
+                if (IsValidFontAsset(symbolFont))
+                {
+                    if (maximizeButtonText.font != symbolFont)
+                    {
+                        maximizeButtonText.font = symbolFont;
+                    }
+                    maximizeButtonText.text = isMaximized ? RestoreIcon : MaximizeIcon;
+                }
+                else
+                {
+                    // Fallback to standard square characters supported by default font
+                    maximizeButtonText.text = isMaximized ? "\u25A0" : "\u25A1";
+                }
+
                 maximizeButtonText.ForceMeshUpdate();
             }
         }

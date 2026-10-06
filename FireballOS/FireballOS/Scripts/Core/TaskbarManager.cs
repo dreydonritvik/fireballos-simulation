@@ -19,6 +19,17 @@ namespace FireballOS
             {
                 Instance = this;
             }
+
+            // Sahne başladığında veya editörden kalan butonları temizle
+            if (runningAppsContainer != null)
+            {
+                for (int i = runningAppsContainer.childCount - 1; i >= 0; i--)
+                {
+                    var child = runningAppsContainer.GetChild(i).gameObject;
+                    if (Application.isPlaying) Destroy(child);
+                    else DestroyImmediate(child);
+                }
+            }
         }
 
         private void OnDestroy()
@@ -50,7 +61,11 @@ namespace FireballOS
         {
             if (activeButtons.TryGetValue(window, out GameObject itemObj))
             {
-                Destroy(itemObj);
+                if (itemObj != null)
+                {
+                    if (Application.isPlaying) Destroy(itemObj);
+                    else DestroyImmediate(itemObj);
+                }
                 activeButtons.Remove(window);
             }
         }

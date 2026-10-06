@@ -9,6 +9,18 @@ namespace FireballOS
         [SerializeField] private Vector2 minSize = new Vector2(300f, 200f);
         [SerializeField] private Vector2 maxSize = new Vector2(1920f, 1020f);
 
+        public Vector2 MinSize
+        {
+            get => minSize;
+            set => minSize = value;
+        }
+
+        public Vector2 MaxSize
+        {
+            get => maxSize;
+            set => maxSize = value;
+        }
+
         private Window windowComponent;
 
         private void Awake()

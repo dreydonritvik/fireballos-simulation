@@ -54,15 +54,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\FireballOS\Scripts\Core\TaskbarManager.cs" />
+    <Compile Include="Assets\FireballOS\Scripts\Core\Controllers\SoundMenuBackdrop.cs" />
     <Compile Include="Assets\FireballOS\Scripts\Core\Window.cs" />
+    <Compile Include="Assets\FireballOS\Scripts\Apps\Minesweeper\MinesweeperCell.cs" />
     <Compile Include="Assets\FireballOS\Scripts\Core\Controllers\StartMenuController.cs" />
     <Compile Include="Assets\FireballOS\Scripts\Core\Controllers\StartMenuBackdrop.cs" />
+    <Compile Include="Assets\FireballOS\Scripts\Core\Controllers\SoundMenuController.cs" />
     <Compile Include="Assets\FireballOS\Scripts\SystemClock.cs" />
     <Compile Include="Assets\FireballOS\Scripts\Core\WindowResizer.cs" />
     <Compile Include="Assets\FireballOS\Scripts\Core\Controllers\LoginScreenController.cs" />
     <Compile Include="Assets\FireballOS\Scripts\Core\DesktopIcon.cs" />
+    <Compile Include="Assets\FireballOS\Scripts\Apps\Minesweeper\MinesweeperGame.cs" />
+    <Compile Include="Assets\FireballOS\Scripts\Core\Audio\SystemSoundManager.cs" />
     <Compile Include="Assets\FireballOS\Scripts\Core\TaskbarItem.cs" />
     <Compile Include="Assets\FireballOS\Scripts\Core\WindowDragger.cs" />
+    <Compile Include="Assets\FireballOS\Scripts\Apps\PaintCanvas.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\FireballOS\FireballOS.asmdef" />
