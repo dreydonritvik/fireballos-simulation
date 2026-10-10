@@ -1,31 +1,58 @@
-# FireballOS C# Desktop UI / OS Simulation
+# FireballOS
 
-This project is an Object-Oriented Programming (OOP) interface built with **C#**. Architecture relies heavily on core C# design patterns and clean code principles.
+FireballOS is the in-game desktop operating system for a Unity game I'm building with a teammate. In the game, the player sits at a computer, and FireballOS is what runs on its screen.
 
-You are free to use it out of the box, integrate it into your own solutions, or extend its capabilities.
+**My part:** the OS layer: login screen, desktop, windows, taskbar, start menu, system UI, and the built-in apps.
+**My teammate's part:** the game itself (gameplay, story, and the world around the computer).
 
----
+This repository contains only the OS layer.
 
-## Key Features
+> Work in progress. The project is under active development, so features and structure may change.
 
-The system includes simulated desktop and system applications designed with a modular structure:
+## Features
 
-- **Login Screen:** User authentication and session entry interface.
-- **Web Browser:** Lightweight embedded browser tool for navigating web content.
-- **This PC (File Explorer):** Directory navigation and local asset management interface.
-- **Notepad:** Text editing application.
-- **Paint:** Basic canvas drawing and pixel sketch tool.
-- **Minesweeper:** Lightweight game for entertainment.
+### Desktop and window system
 
----
+- **Login screen** to enter the desktop session
+- **Windows** that can be dragged, resized, opened, and closed
+- **Taskbar** that shows open windows and lets the player switch between them
+- **Start menu** for launching apps, locking the screen, and logging off
+- **Desktop icons** that open apps
+- **System tray** with a sound menu and a live clock
+- **System sounds** for OS events
 
-## Feature Roadmap & Status
+### Built-in apps
 
-| Feature / Module | Status | Description |
-| :--- | :--- | :--- |
-| **Login Screen** | `Completed` | Fully functional authentication screen. |
-| **Browser** | `Completed` | Core browsing functionality being integrated. |
-| **This PC** | `In Progress` | File management and drive navigation under active development. |
-| **Notepad** | `In Progress` | Text editor logic queued for implementation. |
-| **Paint** | `In Progress` | Canvas drawing features scheduled for future updates. |
-| **Minesweeper** | `In Progress` | A simple minesweeper game. |
+| App | Status |
+| --- | --- |
+| Paint | Working (basic canvas drawing) |
+| Minesweeper | Working |
+| Notepad | Planned |
+| Web browser | Planned |
+| This PC (file explorer) | Planned |
+
+## Project structure
+
+```text
+FireballOS/FireballOS/
+├── Art/            # Backgrounds and icons
+├── Prefabs/        # Reusable UI elements (taskbar items, Minesweeper cells)
+└── Scripts/
+    ├── Core/
+    │   ├── Window.cs, WindowDragger.cs, WindowResizer.cs   # Window behavior
+    │   ├── TaskbarManager.cs, TaskbarItem.cs               # Taskbar
+    │   ├── DesktopIcon.cs                                  # Desktop shortcuts
+    │   ├── Controllers/    # Login screen, start menu, sound menu
+    │   └── Audio/          # System sounds
+    ├── Apps/
+    │   ├── PaintCanvas.cs
+    │   └── Minesweeper/
+    └── SystemClock.cs
+```
+
+Each app is self-contained, so new apps can be added without changing the window or taskbar code.
+
+## Tech stack
+
+- **Engine:** Unity
+- **Language:** C#
