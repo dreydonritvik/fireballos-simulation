@@ -5,7 +5,7 @@ FireballOS is the in-game desktop operating system for a Unity game I'm building
 - **My part:** the OS layer: login screen, desktop, window system, taskbar, start menu, system tray, and built-in apps.
 - **My teammate's part:** the game itself (gameplay, story, and the world around the computer).
 
-This repository contains only the OS layer. It talks to the game through a small bridge interface (`OsBridgeLocator` / `OsSignal`), which lives in the game project.
+This repository contains only the OS layer. It has no dependency on the game code: the game reacts to OS events (such as the player leaving the screen) through Unity events.
 
 > **Work in progress.** Features and structure may still change.
 
@@ -14,7 +14,7 @@ This repository contains only the OS layer. It talks to the game through a small
 ### Login screen
 - Shown first whenever the OS starts or the player logs off
 - `Enter` logs in, `Esc` leaves the computer screen
-- When the player leaves the screen, FireballOS sends an `exit_screen` signal to the game through the bridge
+- When the player leaves the screen, FireballOS raises an `onExitScreen` event that the game listens to
 
 ### Window system
 - Open, close, minimize, and maximize/restore windows
@@ -83,5 +83,3 @@ A window only needs a `Window` component to work with the taskbar, so new apps c
 1. Copy the `FireballOS` and `Fonts` folders into the `Assets` folder of a Unity project.
 2. Install the **TextMeshPro** and **Input System** packages.
 3. Open `SampleScene.unity` and press Play.
-
-`LoginScreenController.cs` uses the bridge interface (`DeadFrame.Contracts`) from the game project. To run FireballOS on its own, add a stub for that interface or remove the bridge call.

@@ -1,9 +1,7 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
-using DeadFrame.Contracts;
 
 namespace FireballOS
 {
@@ -121,17 +119,8 @@ namespace FireballOS
 
             EnsureFirstOnScreen();
 
+            // The game listens to this event to take the player away from the computer
             onExitScreen?.Invoke();
-
-            // Notify game through OsBridge if available
-            try
-            {
-                OsBridgeLocator.Current?.Send(new OsSignal("exit_screen"));
-            }
-            catch (Exception ex)
-            {
-                Debug.LogWarning($"[FireballOS] Bridge exit signal failed: {ex.Message}");
-            }
         }
     }
 }
